@@ -7,9 +7,9 @@ import { SITE_TITLE } from "../consts";
   <div class="modal hidden fixed inset-0 bg-white/30 z-[1] backdrop-blur-sm">
   </div>
   <nav class="my-5 z-[10] relative flex items-center justify-between">
-    <h2><a class="title" href="/">{SITE_TITLE}</a></h2>
+    <h2><a class="title whitespace-nowrap" href="/">{SITE_TITLE}</a></h2>
     <div
-      class="block xs:hidden burger-menu flex flex-col gap-y-[6px] cursor-pointer"
+      class="block xs:hidden burger-menu flex flex-col gap-y-[6px] cursor-pointer z-[10]"
     >
       <div
         class="rounded-sm burger-menu__line1 border-[1.5px] w-7 transition-all duration-300 ease-in-out pointer-events-none"
@@ -25,16 +25,16 @@ import { SITE_TITLE } from "../consts";
       </div>
     </div>
     <div
-      class="links-container hidden basis-lg flex xs:flex justify-center items-center gap-y-10 gap-x-8 xs:flex-row flex-col top-[50%] left-[50%] -translate-[50%]"
+      class="links-container hidden basis-lg xs:flex justify-end items-center gap-y-10 gap-x-10 xs:flex-row flex-col inset-0"
     >
       <div
-        class="links internal-links text-[1.1rem] flex gap-x-4 flex-1 gap-y-20"
+        class="links internal-links text-[1.1rem] flex gap-x-10 gap-y-20 top-[50%] left-[50%]"
       >
         <HeaderLink class="p-0" href="/">Home</HeaderLink>
         <HeaderLink href="/blog">Blog</HeaderLink>
         <HeaderLink href="/about">About</HeaderLink>
       </div>
-      <div class="theme-button -mt-1 flex-1 bottom-0 right-0">
+      <div class="theme-button -mt-1 bottom-0 right-0">
         <button class="theme-button cursor-pointer p-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -135,6 +135,9 @@ import { SITE_TITLE } from "../consts";
     document.querySelector(".links-container").classList.toggle("fixed");
     document.querySelector(".links-container").classList.toggle("flex");
     document.querySelector(".links").classList.toggle("flex-col");
+    document.querySelector(".links").classList.toggle("fixed");
+    document.querySelector(".links").classList.toggle("-translate-[50%]");
+
     line1.classList.toggle("w-7");
     line3.classList.toggle("w-7");
     line1.classList.toggle("w-5");
