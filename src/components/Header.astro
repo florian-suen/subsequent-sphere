@@ -4,15 +4,37 @@ import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-  <nav>
+  <div class="modal hidden fixed inset-0 bg-white/30 z-[1] backdrop-blur-sm">
+  </div>
+  <nav class="my-5 z-[10] relative flex items-center justify-between">
     <h2><a class="title" href="/">{SITE_TITLE}</a></h2>
-    <div class="flex justify-center items-center gap-x-8">
-      <div class="internal-links text-[1.1rem] mt-1 flex gap-x-4">
-        <HeaderLink href="/">Home</HeaderLink>
+    <div
+      class="block xs:hidden burger-menu flex flex-col gap-y-[6px] cursor-pointer"
+    >
+      <div
+        class="rounded-sm burger-menu__line1 border-[1.5px] w-7 transition-all duration-300 ease-in-out pointer-events-none"
+      >
+      </div>
+      <div
+        class="rounded-sm burger-menu__line2 border-[1.5px] w-7 transition-all duration-200 ease-in-out pointer-events-none"
+      >
+      </div>
+      <div
+        class="rounded-sm burger-menu__line3 border-[1.5px] w-7 transition-all duration-300 ease-in-out pointer-events-none"
+      >
+      </div>
+    </div>
+    <div
+      class="links-container hidden basis-lg flex xs:flex justify-center items-center gap-y-10 gap-x-8 xs:flex-row flex-col top-[50%] left-[50%] -translate-[50%]"
+    >
+      <div
+        class="links internal-links text-[1.1rem] flex gap-x-4 flex-1 gap-y-20"
+      >
+        <HeaderLink class="p-0" href="/">Home</HeaderLink>
         <HeaderLink href="/blog">Blog</HeaderLink>
         <HeaderLink href="/about">About</HeaderLink>
       </div>
-      <div class="right-buttons">
+      <div class="theme-button -mt-1 flex-1 bottom-0 right-0">
         <button class="theme-button cursor-pointer p-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -32,6 +54,12 @@ import { SITE_TITLE } from "../consts";
   </nav>
 </header>
 <style>
+  @keyframes rotate-right {
+    50% {
+      transform: rotate(45deg);
+    }
+  }
+
   header {
     margin: 0;
     padding: 0 1em;
@@ -44,11 +72,6 @@ import { SITE_TITLE } from "../consts";
   h2 a,
   h2 a.active {
     text-decoration: none;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
 
   :root.dark nav a {
@@ -73,7 +96,7 @@ import { SITE_TITLE } from "../consts";
 
   nav a {
     color: var(--color-slate-400);
-    padding: 1em 0.5em;
+    padding: 0 0.5em;
     border-bottom: 4px solid transparent;
     text-decoration: none;
   }
@@ -100,6 +123,29 @@ import { SITE_TITLE } from "../consts";
 </style>
 
 <script is:inline>
+  const burgerMenu = document.querySelector(".burger-menu");
+  burgerMenu.addEventListener("click", (event) => {
+    if (event.target !== burgerMenu) return;
+    document.querySelector(".modal").classList.toggle("hidden");
+    const line1 = document.querySelector(".burger-menu__line1");
+    const line2 = document.querySelector(".burger-menu__line2");
+    const line3 = document.querySelector(".burger-menu__line3");
+    document.querySelector(".theme-button").classList.toggle("fixed");
+    document.querySelector(".links-container").classList.toggle("hidden");
+    document.querySelector(".links-container").classList.toggle("fixed");
+    document.querySelector(".links-container").classList.toggle("flex");
+    document.querySelector(".links").classList.toggle("flex-col");
+    line1.classList.toggle("w-7");
+    line3.classList.toggle("w-7");
+    line1.classList.toggle("w-5");
+    line3.classList.toggle("w-5");
+    line1.classList.toggle("rotate-46");
+    line1.classList.toggle("translate-y-[10px]");
+    line2.classList.toggle("scale-0");
+    line3.classList.toggle("-rotate-46");
+    line3.classList.toggle("-translate-y-[7.5px]");
+  });
+
   const svg = document.querySelector("svg.icon-theme");
   const theme = document.querySelector("button.theme-button");
   const sunIcon = `<path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -119,7 +165,6 @@ import { SITE_TITLE } from "../consts";
   }
 
   theme?.addEventListener("click", () => {
-    console.log(svg, localStorage.theme);
     if (svg && localStorage.theme === "dark") {
       localStorage.theme = "light";
       document.documentElement.classList.toggle(
@@ -144,7 +189,6 @@ import { SITE_TITLE } from "../consts";
       );
 
       svg.innerHTML = sunIcon;
-
       svg.classList.remove("icon-tabler-sun");
       svg.classList.add("icon-tabler-moon");
     }

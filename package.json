@@ -9,12 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.0",
+    "@astrojs/mdx": "^4.3.1",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.1",
     "@fontsource-variable/comfortaa": "^5.2.6",
     "@tailwindcss/vite": "^4.1.10",
-    "astro": "^5.9.3",
+    "astro": "^5.12.2",
     "sharp": "^0.34.2",
     "tailwindcss": "^4.1.10"
   },
