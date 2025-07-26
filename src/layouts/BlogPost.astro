@@ -5,7 +5,8 @@ import FormattedDate from "../components/FormattedDate.astro";
 import { Image } from "astro:assets";
 import MainBody from "../components/MainBody.astro";
 type Props = CollectionEntry<"blog">["data"];
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, isAbout } =
+  Astro.props;
 ---
 
 <html lang="en">
@@ -27,6 +28,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         margin: auto;
         padding: 1em;
         color: rgb(var(--gray-dark));
+      }
+
+      @media screen and (max-width: 720px) {
+        .prose {
+          padding: 1em 0em;
+        }
       }
       .title {
         margin-bottom: 1em;
@@ -67,34 +74,28 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         <slot />
       </div>
 
-      <div class="flex justify-center items">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/3_Cpkgb4viM?si=4KqEXBg3u40JlXDI"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
-      </div>
-
-      <section class="mt-15">
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="florian-suen/subsequent-sphere"
-          data-repo-id="R_kgDOO7y0vg"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOO7y0vs4CsaZZ"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="bottom"
-          data-theme="catppuccin_latte"
-          data-lang="en"
-          crossorigin="anonymous"
-          async></script>
-      </section>
+      {
+        !isAbout && (
+          <section class="mt-15">
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="florian-suen/subsequent-sphere"
+              data-repo-id="R_kgDOO7y0vg"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOO7y0vs4CsaZZ"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="bottom"
+              data-theme="catppuccin_latte"
+              data-lang="en"
+              crossorigin="anonymous"
+              async
+            />
+          </section>
+        )
+      }
     </article>
   </MainBody>
 </html>

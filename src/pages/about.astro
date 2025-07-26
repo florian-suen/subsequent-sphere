@@ -1,18 +1,24 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+import Layout from "../layouts/BlogPost.astro";
+import AboutHeroImage from "../assets/blog-placeholder-2.jpg";
 ---
 
 <Layout
-	title="About Me"
-	description="My background"
-	pubDate={new Date('June 15 2025')}
-	heroImage={AboutHeroImage}
+  isAbout={true}
+  title="About Me"
+  description="My background"
+  pubDate={new Date("June 15 2025")}
+  heroImage={AboutHeroImage}
 >
-	<p>
-	I'm a professional Wizard and self-proclaimed Cheese Burger connoisseur. My spare time generally consists of reading (whether in the field of technology or somewhere far beyond the stratosphere), music listening, and anything mildly curious.
-	</p>
+  <p>
+    I'm a professional Wizard and self-proclaimed Cheese Burger connoisseur. My
+    spare time generally consists of reading (whether in the field of technology
+    or somewhere far beyond the stratosphere), music listening, and anything
+    mildly curious.
+  </p>
 
-	 <p>I can speak varying amounts of different languages, but the main 2 I use for my daily driver is English & Chinese.</p>
-
+  <p>
+    I can speak varying amounts of different languages, but the main 2 I use for
+    my daily driver is English & Chinese.
+  </p>
 </Layout>
