@@ -123,6 +123,25 @@ import { SITE_TITLE } from "../consts";
 </style>
 
 <script is:inline>
+  function changeGiscusTheme() {
+    const isDark = document.documentElement.classList.contains("dark");
+
+    function sendMessage(message) {
+      const iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      iframe.contentWindow.postMessage(
+        { giscus: message },
+        "https://giscus.app",
+      );
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: isDark ? "catppuccin_frappe" : "catppuccin_latte",
+      },
+    });
+  }
+
   const burgerMenu = document.querySelector(".burger-menu");
   burgerMenu.addEventListener("click", (event) => {
     if (event.target !== burgerMenu) return;
@@ -195,5 +214,6 @@ import { SITE_TITLE } from "../consts";
       svg.classList.remove("icon-tabler-sun");
       svg.classList.add("icon-tabler-moon");
     }
+    changeGiscusTheme();
   });
 </script>

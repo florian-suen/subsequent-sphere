@@ -74,28 +74,35 @@ const { title, description, pubDate, updatedDate, heroImage, isAbout } =
         <slot />
       </div>
 
-      {
-        !isAbout && (
-          <section class="mt-15">
-            <script
-              src="https://giscus.app/client.js"
-              data-repo="florian-suen/subsequent-sphere"
-              data-repo-id="R_kgDOO7y0vg"
-              data-category="Announcements"
-              data-category-id="DIC_kwDOO7y0vs4CsaZZ"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="bottom"
-              data-theme="catppuccin_latte"
-              data-lang="en"
-              crossorigin="anonymous"
-              async
-            />
-          </section>
-        )
-      }
+      {!isAbout && <section class="giscus-container mt-15" />}
     </article>
   </MainBody>
 </html>
+
+<script>
+  const giscusTheme = document.documentElement.classList.contains("dark")
+    ? "catppuccin_frappe"
+    : "catppuccin_latte";
+  let giscusAttributes = {
+    src: "https://giscus.app/client.js",
+    "data-repo": "florian-suen/subsequent-sphere",
+    "data-repo-id": "R_kgDOO7y0vg",
+    "data-category": "Announcements",
+    "data-category-id": "DIC_kwDOO7y0vs4CsaZZ",
+    "data-mapping": "pathname",
+    "data-strict": "0",
+    "data-reactions-enabled": "1",
+    "data-emit-metadata": "0",
+    "data-input-position": "bottom",
+    "data-theme": giscusTheme,
+    "data-lang": "en",
+    crossorigin: "anonymous",
+    async: "",
+  };
+
+  let giscusScript = document.createElement("script");
+  Object.entries(giscusAttributes).forEach(([key, value]) =>
+    giscusScript.setAttribute(key, value),
+  );
+  document.querySelector(".giscus-container")?.appendChild(giscusScript);
+</script>
