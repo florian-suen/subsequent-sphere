@@ -4,12 +4,12 @@ import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-  <div class="modal hidden fixed inset-0 bg-white/20 z-[1] backdrop-blur-sm">
-  </div>
   <nav class="my-5 z-[10] relative flex items-center justify-between">
-    <h2><a class="title whitespace-nowrap" href="/">{SITE_TITLE}</a></h2>
+    <h2>
+      <a class="title whitespace-nowrap px-3" href="/">{SITE_TITLE}</a>
+    </h2>
     <div
-      class="block xs:hidden burger-menu flex flex-col gap-y-[6px] cursor-pointer z-[10]"
+      class="block xs:hidden burger-menu flex flex-col gap-y-[6px] cursor-pointer z-[10] right-4 top-5"
     >
       <div
         class="rounded-md burger-menu__line1 border-[1.5px] w-7 transition-all duration-300 ease-in-out pointer-events-none"
@@ -27,10 +27,12 @@ import { SITE_TITLE } from "../consts";
     <div
       class="links-container hidden basis-lg xs:flex justify-end items-center gap-y-10 gap-x-10 xs:flex-row flex-col inset-0"
     >
+      <div class="modal hidden absolute inset-0 bg-white/20 backdrop-blur-sm">
+      </div>
       <div
-        class="links internal-links text-[1.1rem] flex gap-x-5 md:gap-x-10 gap-y-20 top-[50%] left-[50%]"
+        class="links internal-links text-[1.1rem] flex gap-x-5 md:gap-x-10 gap-y-20 top-[50%] left-[50%] *:p-10 xs:*:p-0 xs:*:px-[8.8px]"
       >
-        <HeaderLink class="p-0" href="/">Home</HeaderLink>
+        <HeaderLink href="/">Home</HeaderLink>
         <HeaderLink href="/blog">Blog</HeaderLink>
         <HeaderLink href="/about">About</HeaderLink>
       </div>
@@ -96,7 +98,6 @@ import { SITE_TITLE } from "../consts";
 
   nav a {
     color: var(--color-slate-400);
-    padding: 0 0.5em;
     border-bottom: 4px solid transparent;
     text-decoration: none;
   }
@@ -143,12 +144,14 @@ import { SITE_TITLE } from "../consts";
   }
 
   const burgerMenu = document.querySelector(".burger-menu");
-  burgerMenu.addEventListener("click", (event) => {
-    if (event.target !== burgerMenu) return;
-    document.querySelector(".modal").classList.toggle("hidden");
-    const line1 = document.querySelector(".burger-menu__line1");
-    const line2 = document.querySelector(".burger-menu__line2");
-    const line3 = document.querySelector(".burger-menu__line3");
+  const modal = document.querySelector(".modal");
+  const line1 = document.querySelector(".burger-menu__line1");
+  const line2 = document.querySelector(".burger-menu__line2");
+  const line3 = document.querySelector(".burger-menu__line3");
+
+  function openMenu() {
+    modal.classList.toggle("hidden");
+    burgerMenu.classList.toggle("fixed");
     document.querySelector(".theme-button").classList.toggle("fixed");
     document.querySelector(".links-container").classList.toggle("hidden");
     document.querySelector(".links-container").classList.toggle("fixed");
@@ -166,6 +169,15 @@ import { SITE_TITLE } from "../consts";
     line2.classList.toggle("scale-0");
     line3.classList.toggle("-rotate-46");
     line3.classList.toggle("-translate-y-[7.5px]");
+  }
+
+  modal.addEventListener("click", (e) => {
+    openMenu();
+  });
+
+  burgerMenu.addEventListener("click", (event) => {
+    if (event.target !== burgerMenu) return;
+    openMenu();
   });
 
   const svg = document.querySelector("svg.icon-theme");
