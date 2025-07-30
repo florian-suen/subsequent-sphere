@@ -1,6 +1,6 @@
 # Personal Website
 
-Welcome to the repository for my personal website/portfolio. This site showcases my work, skills, and blog posts.
+Welcome to the repository for my personal website. This site showcases my work, skills, and blog posts.
 
 ## 🚀 Features
 
@@ -8,8 +8,8 @@ Welcome to the repository for my personal website/portfolio. This site showcases
 - ✅ Dark/light mode toggle
 - ✅ Game dev
 - ✅ Blog functionality
-- ✅ Contact form
-- ✅ [Add other features]
+
+
 
 ## 🛠️ Technologies
 
@@ -17,6 +17,4 @@ Welcome to the repository for my personal website/portfolio. This site showcases
 
 - [Astro](https://astro.build/)
 
-**Deployment:**
 
-- Hosted on [Vercel](https://vercel.com/)
